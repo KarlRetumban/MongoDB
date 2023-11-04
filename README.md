@@ -1,5 +1,9 @@
-# Clothing Reviews Data as Document JSON Data
-### Tool used is MongoDB
+# Clothing Reviews Data (JSON Documents) in MongoDB
+The tool used is MongoDB Compass.
+
+We will import the rented clothing reviews JSON data and run NoSQL queries in mongoshell.
+
+_____________________________
 
 ### Description of the data
 The dataset contains information about rented attires for certain occassions. It also includes the ratings given by the renters. The user feedback or user review is also included in the data as well as information about the user and the attire.
