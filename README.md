@@ -1,8 +1,8 @@
-# Social Media Reviews Data as Document JSON Data
-### Tools used is MongoDB
+# Clothing Reviews Data as Document JSON Data
+### Tool used is MongoDB
 
-### Description of use case
-We create a Social Media data and store as graph data. The nodes are the social media users connected by links or edges.
+### Description of data
+The dataset contains information about rented attires for certain occassions. It also includes the ratings given by the renters. The user feedback or user review is also included in the data as well as information about the user and the attire.
 
 #### Graph data view in MongoDB
 ![alt text](https://github.com/KarlRetumban/Sample2/blob/main/MongoDB.PNG)
