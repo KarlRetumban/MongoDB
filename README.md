@@ -1,14 +1,33 @@
 # Clothing Reviews Data as Document JSON Data
 ### Tool used is MongoDB
 
-### Description of data
+### Description of the data
 The dataset contains information about rented attires for certain occassions. It also includes the ratings given by the renters. The user feedback or user review is also included in the data as well as information about the user and the attire.
 
-#### Graph data view in MongoDB
-![alt text](https://github.com/KarlRetumban/Sample2/blob/main/MongoDB.PNG)
+### Import data to MongoDB Compass using 'mongoimport'
+We use the command prompt in importing the rented clothing review data.
+Below is the code used.
+
+![alt text](https://github.com/KarlRetumban/Sample2/blob/main/images/mongoimport_code.PNG)
+
+Here's what each part of the command does:
+
+--db: Specifies the target database where you want to import your data.
+--collection: Specifies the target collection within the database.
+--file: Specifies the path to the JSON file you want to import.
+
+In our case, the database named "Reviews" a collection named "rentedclothing_reviews" and your JSON file is named "renttherunway_final_data.json," you would run the code below:
+
+![alt text](https://github.com/KarlRetumban/Sample2/blob/main/images/mongoimport_code.PNG)
+
+```cmd
+mongoimport --db Reviews --collection rentedclothing_reviews --file renttherunway_final_data.jsonrenttherunway_final_data.json
+
+#### Data collection view in MongoDB
+![alt text](https://github.com/KarlRetumban/Sample2/blob/main/images/Data.PNG)
 
 
-### Codes for creating the Social Media graph data
+### NoSQL queries using the rented clothing review data
 ```mongodb
 
 db.createCollection("reviews")
