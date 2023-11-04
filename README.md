@@ -21,38 +21,104 @@ Here's what each part of the command does:
 
 In our case, the database named "Reviews" a collection named "rentedclothing_reviews" and your JSON file is named "renttherunway_final_data.json," you would run the code below:
 
-![alt text](https://github.com/KarlRetumban/Sample2/blob/main/images/mongoimport_code.PNG)
-
 ```cmd
 mongoimport --db Reviews --collection rentedclothing_reviews --file renttherunway_final_data.jsonrenttherunway_final_data.json
 ```
 
-#### Data collection view in MongoDB
+#### Data collection view in MongoDB Compass
+Below is the view of the rented clothing review document collections in MongoDB Compass. There are a total of 192,544 documents in the 'rentedclothing_reviews' collection. The fields included are:
+
+
+* fit
+* user_id
+* bust size
+* item_id
+* weight
+* rating
+* rented for
+* review_text
+* body type
+* review_summary
+* category
+* height
+* size
+* age
+* review_date
+
 ![alt text](https://github.com/KarlRetumban/Sample2/blob/main/images/Data.PNG)
 
 
-### NoSQL queries using the rented clothing review data
+_____________________________________________
+
+
+### Run NoSQL Queries
+We run the following NoSQL queries using the rented clothing review data.
+
+##### 1. Get the highest reviews given. We also convert the rating to integer first since it is in string format.
+   
 ```mongodb
+db.rentedclothing_reviews.aggregate([
+  {
+    $project: {
+      rating: { $toInt: "$rating" }
+    }
+  },
+  {
+    $sort: { rating: -1 }
+  },
+  {
+    $limit: 1
+  }
+])
+```
 
-db.createCollection("reviews")
+##### 2. Get average rating by dress category
+   
+```mongodb
+db.rentedclothing_reviews.aggregate([
+  {
+    $project: {
+      category: 1,
+      rating: { $toInt: "$rating" }
+    }
+  },
+  {
+    $group: {
+      _id: "$category",
+      averageRating: { $avg: "$rating" }
+    }
+  }
+])
+```
 
+##### 3. Total number of rents per dress category
+   
+```mongodb
+db.rentedclothing_reviews.aggregate([
+  {
+    $group: {
+      _id: "$category",
+      count: { $sum: 1 }
+    }
+  }
+])
+```
 
-db.reviews.insertMany([
-{trip:"Darwin City Stroll", reviewer:"Evan Drinkeld", rating:10, review:"The city stroll itself was filled with adventure", date: "2023-07-20"},
-{trip:"Jabiru Park Walk", reviewer:"Patti Fanshaw", rating:9, review:"This walk was absolutely amazing! ", date: "2023-08-15"},
-{trip:"East Arnhem Land Beach Walk", reviewer:"Kristoffer Tremathack", rating:9, review:"The beach walk and the coast was beautiful.", date: 
-"2023-06-10"},
-{trip:"Kings Canyon Uluru Walk", reviewer:"Kylila Landall", rating:7, review:"The views were breathtaking.", date: "2023-06-10"},
-{trip:"Katherine Riverside Walk", reviewer:"Hilton Rolfini", rating:10, review:"The riverside walk is perfect.", date: "2023-02-17"},
-{trip:"Darwin Hidden Valley Tourist Walk", reviewer:"Bridie Calbaithe", rating:8, review:" The views were breathtaking.", date: "2023-05-14"},
-{trip:"Lake Woods Conservation Covenant Trail", reviewer:"Noah Pickthall", rating:9, review:"This walk was absolutely amazing.", "date": 
-"2023-08-15"},
-{trip:"Darwin City Stroll", reviewer:"Hilary Crawford", rating:2, review:"I did not like the walk, because it was so hot.", "date": "2023-06-10"},
-{trip:"Darwin City Stroll", reviewer:"Marianna Gerhold", rating:7, review:"We explored city places, met friendly people", date: "2023-05-19"},
-{trip:"Mataranka Park Trail", reviewer:"Kellby Rome", rating:6, review:"The trail is fun and I enjoyed it.!", date: "2023-01-16"},
-{trip:"Darwin City Stroll", reviewer:"Zea Bernard", rating:3, review:"I did not enjoy the walk, it was tiring", date: "2023-04-18"},
-{trip:"East Arnhem Land Beach Walk", reviewer:"Barbie Rappaport", rating:8, review:"Great and stunning ocean views!", date: "2023-02-15"},
-{trip:"Darwin City Stroll", reviewer:"Marcelia Thorndale", rating:1, review:"I did not like the walk, I was tired", date: "2023-04-18"},
-{trip:"East Arnhem Land Beach Walk", reviewer:"Vannie Lucks", rating:8, review:"Great views and I like the sea breeze! I highly recommend 
-this walk on the beach to anyone visiting the area.", date: "2023-03-15"}])
+##### 4. Get the average age of renters by dress category
+   
+```mongodb
+db.rentedclothing_reviews.aggregate([
+  {
+    $project: {
+      category: 1,
+      age: { $toInt: "$age" }
+    }
+  },
+  {
+    $group: {
+      _id: "$category",
+      averageAge: { $avg: "$age" }
+    }
+  }
+])
 ```
