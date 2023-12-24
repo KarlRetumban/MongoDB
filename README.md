@@ -26,7 +26,7 @@ Here's what each part of the command does:
 In our case, the database named "Reviews" a collection named "rentedclothing_reviews" and your JSON file is named "renttherunway_final_data.json," you would run the code below:
 
 ```cmd
-mongoimport --db Reviews --collection rentedclothing_reviews --file renttherunway_final_data.jsonrenttherunway_final_data.json
+mongoimport --db Reviews --collection rentedclothing_reviews --file renttherunway_final_data.json
 ```
 
 #### Data collection view in MongoDB Compass
